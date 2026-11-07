@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FoodBridge: Stop Food Waste. Feed a Neighbour.</title>
+<meta name="description" content="FoodBridge connects restaurants, hotels, events and households with NGOs so surplus food reaches people who need it.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌉</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12261d;--leaf:#1f6b45;--leaf2:#e3f0e6;--sun:#f2b01e;--chilli:#d9452b;--mist:#f4f8f3;--white:#fff;--muted:#4c5f55;
+--h:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--b:'Figtree','Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);color:var(--ink);background:var(--mist);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:var(--h);line-height:1.08;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--chilli);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+section{padding:84px 0}
+h2{font-size:clamp(2rem,4.5vw,3.2rem);max-width:18ch}
+.lead{max-width:56ch;color:var(--muted);margin-top:16px}
+.btn{display:inline-block;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:600 1rem var(--b);padding:14px 24px;border-radius:999px;background:var(--sun);color:var(--ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:2px solid currentColor}
+.btn.dark{background:var(--ink);color:#fff}
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(244,248,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid #d9e6dc}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font:800 1.4rem var(--h);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo svg{width:34px;height:34px}
+nav ul{display:flex;gap:26px;list-style:none;padding:0}
+nav ul a{text-decoration:none;font-weight:500;font-size:.95rem}
+nav ul a:hover{color:var(--leaf)}
+@media(max-width:820px){nav ul{display:none}}
+/* hero */
+.hero{background:var(--leaf);color:#fff;padding:72px 0 96px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.9rem);font-weight:800}
+.hero h1 span{display:block;color:var(--sun)}
+.hero p.lead{color:#d4e8da;font-size:1.15rem}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.hero .live{margin-top:34px;font-size:.95rem;color:#cfe5d6;display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--sun);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(242,176,30,0)}0%{box-shadow:0 0 0 0 rgba(242,176,30,.7)}}
+.arc{position:absolute;left:-10%;right:-10%;bottom:-120px;height:200px;border-top:6px dashed rgba(242,176,30,.35);border-radius:50%/100% 100% 0 0;pointer-events:none}
+.demo{background:#fff;color:var(--ink);border-radius:22px;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.demo h3{font-size:1.35rem}
+.demo label{display:block;font-weight:600;font-size:.9rem;margin:16px 0 6px}
+.demo input,.demo select{width:100%;font:500 1rem var(--b);padding:12px 14px;border:2px solid #cfdcd2;border-radius:12px;background:#fff;color:var(--ink)}
+.demo .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.demo .btn{width:100%;margin-top:20px;background:var(--ink);color:#fff}
+#match{margin-top:18px;border-radius:14px;background:var(--leaf2);padding:16px;display:none}
+#match.show{display:block;animation:pop .35s}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+#match b{font-family:var(--h);font-size:1.1rem}
+#match small{display:block;color:var(--muted);margin-top:4px}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+/* problem */
+.problem{background:var(--ink);color:#fff}
+.problem h2{color:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border-top:1px solid #35503f}
+.stats div{padding:28px 24px 0 0}
+.stats strong{display:block;font:800 clamp(2.6rem,6vw,4.4rem) var(--h);color:var(--sun);line-height:1}
+.stats span{display:block;margin-top:10px;color:#c5d8cc;max-width:28ch}
+.stats small{display:block;margin-top:8px;color:#8fa89a;font-size:.8rem}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
+/* solution */
+.sol{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.bridge{background:var(--white);border-radius:24px;padding:28px}
+.bridge svg{width:100%;height:auto;display:block}
+@media(max-width:860px){.sol{grid-template-columns:1fr}}
+/* how */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;counter-reset:s;position:relative}
+.step{background:#fff;border-radius:18px;padding:24px;counter-increment:s;border-bottom:6px solid var(--sun)}
+.step::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--leaf);color:#fff;font:700 1.1rem var(--h);margin-bottom:14px}
+.step h3{font-size:1.25rem;margin-bottom:6px}
+.step p{color:var(--muted);font-size:.97rem}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+/* features */
+.features{background:var(--leaf2)}
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px}
+.f{padding:24px;border-radius:20px;background:#fff}
+.f:nth-child(1){background:var(--sun)}
+.f:nth-child(4){background:var(--ink);color:#fff}
+.f:nth-child(4) p{color:#c5d8cc}
+.f .ic{font-size:2rem}
+.f h3{font-size:1.3rem;margin:12px 0 6px}
+.f p{font-size:.96rem;color:var(--muted)}
+.f:nth-child(1) p{color:#3d3208}
+@media(max-width:960px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+/* impact */
+.impact .grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:44px;align-items:start}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.big div{background:#fff;border-radius:18px;padding:22px}
+.big strong{font:800 2.5rem var(--h);color:var(--leaf);display:block;line-height:1}
+.big span{font-size:.92rem;color:var(--muted)}
+.bars{background:#fff;border-radius:18px;padding:24px}
+.bars h3{font-size:1.15rem;margin-bottom:16px}
+.bar{display:grid;grid-template-columns:62px 1fr 56px;gap:10px;align-items:center;margin:10px 0;font-size:.9rem}
+.bar i{display:block;height:16px;border-radius:8px;background:linear-gradient(90deg,var(--leaf),var(--sun));width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.note{font-size:.8rem;color:var(--muted);margin-top:14px}
+@media(max-width:860px){.impact .grid{grid-template-columns:1fr}}
+/* stories */
+.stories{background:var(--white)}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+blockquote{padding:26px;border-radius:20px;background:var(--mist);border-left:6px solid var(--chilli)}
+blockquote p{font-size:1.05rem}
+blockquote footer{margin-top:16px;font-size:.9rem;color:var(--muted)}
+blockquote footer b{color:var(--ink);display:block}
+@media(max-width:860px){.sgrid{grid-template-columns:1fr}}
+/* cta */
+.join{background:var(--sun)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
+.tabs button{font:600 1rem var(--b);padding:11px 20px;border-radius:999px;border:2px solid var(--ink);background:transparent;cursor:pointer;color:var(--ink)}
+.tabs button[aria-selected=true]{background:var(--ink);color:#fff}
+.panel{margin-top:22px;background:#fff;border-radius:20px;padding:28px;max-width:640px}
+.panel form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.panel input{font:500 1rem var(--b);padding:12px 14px;border:2px solid #cfdcd2;border-radius:12px;width:100%}
+.panel .btn{grid-column:1/-1;background:var(--ink);color:#fff}
+.panel .ok{display:none;font-weight:600;color:var(--leaf);margin-top:14px}
+@media(max-width:520px){.panel form{grid-template-columns:1fr}}
+/* footer */
+footer.site{background:var(--ink);color:#c5d8cc;padding:56px 0 32px;font-size:.95rem}
+footer.site .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:32px}
+footer.site h4{color:#fff;font-family:var(--h);margin-bottom:10px}
+footer.site ul{list-style:none;padding:0}
+footer.site li{margin:6px 0}
+footer.site a{text-decoration:none}
+footer.site a:hover{color:var(--sun)}
+.copy{border-top:1px solid #35503f;margin-top:36px;padding-top:20px;font-size:.85rem}
+@media(max-width:760px){footer.site .cols{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="logo" href="#top" aria-label="FoodBridge home"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#1f6b45"/><path d="M5 27 Q20 7 35 27" stroke="#f2b01e" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M5 27H35" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>FoodBridge</a>
+  <ul><li><a href="#problem">The problem</a></li><li><a href="#how">How it works</a></li><li><a href="#impact">Impact</a></li><li><a href="#stories">Stories</a></li></ul>
+  <a class="btn dark" href="#join" style="padding:10px 20px">Donate food</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div>
+    <h1>Good food belongs on plates<span>not in bins.</span></h1>
+    <p class="lead" style="margin-top:20px">FoodBridge connects restaurants, hotels, events and homes with nearby NGOs, so surplus food reaches people who need a meal today.</p>
+    <div class="cta"><a class="btn" href="#join">Donate surplus food</a><a class="btn ghost" href="#how">See how it works</a></div>
+    <p class="live"><span class="dot"></span><span><b id="ticker">12,480</b> meals delivered this month</span></p>
+  </div>
+  <div class="demo">
+    <h3>Try a donation in 10 seconds</h3>
+    <form id="demo">
+      <label for="what">What do you have?</label>
+      <select id="what"><option>Cooked meals</option><option>Packaged food</option><option>Fruits &amp; vegetables</option><option>Bakery items</option></select>
+      <div class="row"><div><label for="qty">Servings</label><input id="qty" type="number" min="1" max="2000" value="40"></div>
+      <div><label for="area">Area</label><select id="area"><option>Indiranagar</option><option>Koramangala</option><option>Jayanagar</option><option>Whitefield</option></select></div></div>
+      <button class="btn" type="submit">Find an NGO nearby</button>
+    </form>
+    <div id="match" role="status" aria-live="polite"></div>
+  </div>
+</div><div class="arc"></div></header>
+
+<section class="problem" id="problem"><div class="wrap">
+  <h2>Food is wasted in one lane. People go hungry in the next.</h2>
+  <p class="lead" style="color:#c5d8cc">Surplus from a wedding hall or a hotel buffet is often thrown out within hours because nobody can collect it in time. The gap is coordination, not food.</p>
+  <div class="stats">
+    <div><strong>1/3</strong><span>of all food produced for people is lost or wasted</span><small>FAO</small></div>
+    <div><strong>~1 in 7</strong><span>people in India is undernourished</span><small>UN SOFI report</small></div>
+    <div><strong>4 hrs</strong><span>is how long cooked food stays safe to redistribute, so speed matters</span><small>Food safety guidance</small></div>
+  </div>
+</div></section>
+
+<section id="solution"><div class="wrap sol">
+  <div>
+    <h2>One platform between the kitchen and the community.</h2>
+    <p class="lead">Donors post surplus in under a minute. FoodBridge finds the closest verified NGO that can use it, books a volunteer pickup, and confirms delivery with a photo and a meal count.</p>
+    <p style="margin-top:20px"><a class="btn dark" href="#how">Follow a donation</a></p>
+  </div>
+  <div class="bridge">
+    <svg viewBox="0 0 440 260" role="img" aria-label="Diagram showing donors on the left connected by FoodBridge to NGOs and communities on the right">
+      <rect x="10" y="150" width="110" height="90" rx="14" fill="#e3f0e6"/><text x="65" y="190" text-anchor="middle" font-size="34">🍲</text><text x="65" y="220" text-anchor="middle" font-size="13" font-family="Figtree" fill="#12261d">Donors</text>
+      <rect x="320" y="150" width="110" height="90" rx="14" fill="#e3f0e6"/><text x="375" y="190" text-anchor="middle" font-size="34">🏠</text><text x="375" y="220" text-anchor="middle" font-size="13" font-family="Figtree" fill="#12261d">NGOs &amp; shelters</text>
+      <path d="M65 150 Q220 -30 375 150" fill="none" stroke="#1f6b45" stroke-width="6" stroke-linecap="round"/>
+      <path d="M65 150 Q220 -30 375 150" fill="none" stroke="#f2b01e" stroke-width="6" stroke-dasharray="2 14" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+      <circle cx="220" cy="52" r="30" fill="#12261d"/><text x="220" y="58" text-anchor="middle" font-size="22">🌉</text>
+      <text x="220" y="250" text-anchor="middle" font-size="13" font-family="Figtree" fill="#4c5f55">Matched, picked up, delivered</text>
+    </svg>
+  </div>
+</div></section>
+
+<section id="how" style="padding-top:0"><div class="wrap">
+  <h2>From surplus to supper in four steps.</h2>
+  <div class="steps">
+    <div class="step"><h3>List it</h3><p>Add the food type, servings and the time it stays fresh. Photos are optional.</p></div>
+    <div class="step"><h3>Get matched</h3><p>We alert verified NGOs within range. The first to accept gets the pickup.</p></div>
+    <div class="step"><h3>Pick up</h3><p>A nearby volunteer or the NGO's own van collects it. You track it live.</p></div>
+    <div class="step"><h3>See the impact</h3><p>Receive the meal count, a delivery photo and a donation receipt.</p></div>
+  </div>
+</div></section>
+
+<section class="features"><div class="wrap">
+  <h2>Built for donors, NGOs and neighbours.</h2>
+  <div class="fgrid">
+    <div class="f"><div class="ic">🍛</div><h3>Easy food donation</h3><p>Post surplus from your phone. Repeat donors can schedule daily or weekly pickups.</p></div>
+    <div class="f"><div class="ic">🤝</div><h3>NGO partnerships</h3><p>Every partner is verified, with capacity and dietary needs shown up front.</p></div>
+    <div class="f"><div class="ic">🛵</div><h3>Pickup coordination</h3><p>Route-aware volunteer matching and live status, so food moves while it is fresh.</p></div>
+    <div class="f"><div class="ic">🌱</div><h3>Community participation</h3><p>Join a neighbourhood crew, volunteer on weekends or sponsor a community fridge.</p></div>
+  </div>
+</div></section>
+
+<section class="impact" id="impact"><div class="wrap">
+  <h2>Every pickup adds up.</h2>
+  <p class="lead">Live totals from the FoodBridge network.</p>
+  <div class="grid">
+    <div class="big">
+      <div><strong data-n="184000">0</strong><span>meals delivered</span></div>
+      <div><strong data-n="62000">0</strong><span>kg of food saved from waste</span></div>
+      <div><strong data-n="410">0</strong><span>verified NGO partners</span></div>
+      <div><strong data-n="3200">0</strong><span>active volunteers</span></div>
+    </div>
+    <div class="bars" id="bars">
+      <h3>Meals delivered per month</h3>
+      <div class="bar"><span>Jun</span><i data-w="38"></i><b>9.1k</b></div>
+      <div class="bar"><span>Jul</span><i data-w="52"></i><b>12.4k</b></div>
+      <div class="bar"><span>Aug</span><i data-w="64"></i><b>15.3k</b></div>
+      <div class="bar"><span>Sep</span><i data-w="80"></i><b>19.2k</b></div>
+      <div class="bar"><span>Oct</span><i data-w="100"></i><b>24.0k</b></div>
+      <p class="note">Sample data for design demonstration.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="stories" id="stories"><div class="wrap">
+  <h2>Stories from the bridge.</h2>
+  <div class="sgrid">
+    <blockquote><p>We used to throw away 30 meals after every lunch service. Now an NGO collects them before we close the kitchen.</p><footer><b>Meera Nair</b>Owner, a neighbourhood restaurant</footer></blockquote>
+    <blockquote><p>The alert came at 9 pm and the food arrived by 9:40. Our shelter served dinner to 60 more people that night.</p><footer><b>Fr. Joseph</b>Coordinator, a night shelter</footer></blockquote>
+    <blockquote><p>I deliver on my scooter after work. It takes 20 minutes and I can see the photo of the people who ate.</p><footer><b>Arjun S.</b>Volunteer rider</footer></blockquote>
+  </div>
+  <p class="note" style="margin-top:14px">Illustrative stories for design demonstration.</p>
+</div></section>
+
+<section class="join" id="join"><div class="wrap">
+  <h2>Ready to close the gap?</h2>
+  <p class="lead" style="color:#3d3208">Pick how you want to help. We reply within one working day.</p>
+  <div class="tabs" role="tablist" id="tabs">
+    <button role="tab" aria-selected="true" data-t="Donate food">Donate food</button>
+    <button role="tab" aria-selected="false" data-t="Volunteer">Volunteer</button>
+    <button role="tab" aria-selected="false" data-t="Partner with us">Partner with us</button>
+  </div>
+  <div class="panel">
+    <h3 id="ptitle">Donate food</h3>
+    <p id="pdesc" style="color:var(--muted);margin-top:6px">Restaurants, hotels, caterers and households: tell us where to collect.</p>
+    <form id="joinform">
+      <input aria-label="Name" placeholder="Your name" required>
+      <input aria-label="Phone or email" placeholder="Phone or email" required>
+      <button class="btn" type="submit" id="pbtn">Start donating</button>
+    </form>
+    <p class="ok" id="ok" role="status">Thank you! We will contact you shortly.</p>
+  </div>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div><a class="logo" href="#top" style="color:#fff">FoodBridge</a><p style="margin-top:10px;max-width:32ch">Connecting surplus food with people who need it, one pickup at a time.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="#problem">The problem</a></li><li><a href="#how">How it works</a></li><li><a href="#impact">Impact</a></li></ul></div>
+    <div><h4>Get involved</h4><ul><li><a href="#join">Donate food</a></li><li><a href="#join">Volunteer</a></li><li><a href="#join">Partner</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="mailto:hello@foodbridge.example">hello@foodbridge.example</a></li><li>+91 90000 00000</li><li>Bengaluru, India</li></ul></div>
+  </div>
+  <p class="copy">© 2026 FoodBridge. Built for AI Prompt Battle by OSCode.</p>
+</div></footer>
+
+<script>
+(function(){
+  var fmt=function(n){return n.toLocaleString('en-IN')};
+  // hero match demo
+  var ngos={Indiranagar:['Asha Kiran Trust',1.2],Koramangala:['Annapurna Seva Samiti',0.9],Jayanagar:['Hope Home Shelter',1.6],Whitefield:['Roti for All Foundation',2.1]};
+  document.getElementById('demo').addEventListener('submit',function(e){
+    e.preventDefault();
+    var a=document.getElementById('area').value,q=Math.max(1,+document.getElementById('qty').value||1),w=document.getElementById('what').value.toLowerCase();
+    var n=ngos[a],m=document.getElementById('match');
+    m.innerHTML='<b>Matched with '+n[0]+'</b><small>'+n[1]+' km from you. A volunteer can collect '+q+' servings of '+w+' in about '+(15+Math.round(n[1]*8))+' minutes.</small>';
+    m.classList.remove('show');void m.offsetWidth;m.classList.add('show');
+  });
+  // ticker
+  var t=document.getElementById('ticker'),c=12480;
+  setInterval(function(){c+=Math.floor(Math.random()*4)+1;t.textContent=fmt(c)},2500);
+  // impact reveal (one orchestrated moment)
+  var done=false;
+  function run(){
+    if(done)return;done=true;
+    document.querySelectorAll('[data-n]').forEach(function(el){
+      var end=+el.dataset.n,s=null;
+      (function step(ts){s=s||ts;var p=Math.min((ts-s)/1400,1);el.textContent=fmt(Math.round(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)})(performance.now());
+    });
+    document.querySelectorAll('[data-w]').forEach(function(el){el.style.width=el.dataset.w+'%'});
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es,o){if(es[0].isIntersecting){run();o.disconnect()}},{threshold:.3}).observe(document.getElementById('impact'));
+  }else run();
+  // CTA tabs
+  var info={'Donate food':['Restaurants, hotels, caterers and households: tell us where to collect.','Start donating'],
+  'Volunteer':['Give 2 hours a week to pick up and deliver food in your area.','Sign me up'],
+  'Partner with us':['NGOs, companies and colleges: let us build a food rescue programme together.','Request a call']};
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+    var k=b.dataset.t;
+    document.getElementById('ptitle').textContent=k;
+    document.getElementById('pdesc').textContent=info[k][0];
+    document.getElementById('pbtn').textContent=info[k][1];
+    document.getElementById('ok').style.display='none';
+  });
+  document.getElementById('joinform').addEventListener('submit',function(e){
+    e.preventDefault();document.getElementById('ok').style.display='block';this.reset();
+  });
+})();
+</script>
+</body>
+</html>
